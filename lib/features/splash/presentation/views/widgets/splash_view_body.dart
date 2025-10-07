@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:plus_app/core/utils/app_router.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/circle_avatar_with_ripple_animation.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
+
+  @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 6), () {
+
+      GoRouter.of(context).push(AppRouter.kLogInView);
+      
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

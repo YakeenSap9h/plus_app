@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plus_app/features/splash/presentation/views/widgets/splash_view.dart';
+import 'package:plus_app/core/utils/app_router.dart';
 
 void main() {
   runApp(const PulseApp());
@@ -10,12 +10,13 @@ class PulseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Color(0xff141628),
       ),
-      home: const SplashView(),
+      
     );
   }
 }
