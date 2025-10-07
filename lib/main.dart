@@ -12,7 +12,7 @@ class PulseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Color(0xff141628),
       ),
       home: const SplashView(),

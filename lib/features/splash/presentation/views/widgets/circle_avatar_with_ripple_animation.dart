@@ -15,9 +15,8 @@ class CircleAvatarWithRippleAnimation extends StatelessWidget {
       ripplesCount: 3,
       duration: const Duration(milliseconds: 6 * 300),
       child: CircleAvatar(
-        minRadius: 75,
-        maxRadius: 75,
-        backgroundImage: AssetImage('assets/images/p_with_back.png'),
+        radius: 40,
+        backgroundImage: AssetImage('assets/images/image.png'),
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:plus_app/features/splash/presentation/views/widgets/circle_avata
 
 class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -12,20 +12,17 @@ class SplashViewBody extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.deepPurpleAccent,
-              Colors.purpleAccent.withValues(alpha: .5),
-            ],
+            colors: [Colors.blue, Color(0xFFAB47BC)], // Deep purple to lavender
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            stops: [0.4, 0.5],
+            stops: [.2, .6],
           ),
         ),
         child: Column(
           children: [
             const SizedBox(height: 150),
             const CircleAvatarWithRippleAnimation(),
-            const SizedBox(height: 50),
+            const SizedBox(height: 100),
             const Text(
               'Pulse',
               style: TextStyle(
@@ -34,24 +31,24 @@ class SplashViewBody extends StatelessWidget {
                 fontSize: 77,
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
 
             Text(
-              'Connect Share Inspire',
+              'Connect • Share • Inspire',
               style: TextStyle(
                 color: Colors.white.withValues(alpha: 0.7),
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w700,
                 fontSize: 24,
               ),
             ),
 
-            const SizedBox(height: 80),
+            const SizedBox(height: 50),
             SpinKitThreeBounce(
               color: Colors.white.withValues(alpha: .7),
               size: 30.0,
             ),
 
-            const Expanded(child: SizedBox(height: 80)),
+            const Expanded(child: SizedBox(height: 250)),
 
             Text(
               'Craeted by sap9h',
@@ -62,7 +59,7 @@ class SplashViewBody extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 50),
           ],
         ),
       ),
