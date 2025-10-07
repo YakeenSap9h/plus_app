@@ -9,25 +9,15 @@ abstract class AppRouter {
 
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SplashView(),
-      ),
-        GoRoute(
+      GoRoute(path: '/', builder: (context, state) => const SplashView()),
+      GoRoute(
         path: kLogInView,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
           child: const LogInView(),
           transitionDuration: const Duration(milliseconds: 600),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 1),
-                end: Offset.zero,
-              ).animate(animation),
-              child: FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-            );
+            return FadeTransition(opacity: animation, child: child);
           },
         ),
       ),

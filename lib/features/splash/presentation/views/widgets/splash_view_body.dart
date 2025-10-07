@@ -3,6 +3,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:plus_app/core/utils/app_router.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/circle_avatar_with_ripple_animation.dart';
+import 'package:plus_app/features/splash/presentation/views/widgets/connect_share_inspire.dart';
+import 'package:plus_app/features/splash/presentation/views/widgets/pulse_text.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -16,9 +18,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 6), () {
-
       GoRouter.of(context).push(AppRouter.kLogInView);
-      
     });
   }
 
@@ -27,38 +27,22 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     return Center(
       child: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Color(0xFFAB47BC)], // Deep purple to lavender
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [.2, .6],
-          ),
-        ),
+        decoration: BoxDecoration(gradient: linearGradientInSplashView()),
         child: Column(
           children: [
             const SizedBox(height: 150),
             const CircleAvatarWithRippleAnimation(),
             const SizedBox(height: 100),
-            const Text(
-              'Pulse',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 77,
-              ),
-            ),
+            PulseText(fontSize: 77),
             const SizedBox(height: 10),
 
-            Text(
-              'Connect • Share • Inspire',
-              style: TextStyle(
+            ConnectShareInspire(
+              textStyle: TextStyle(
                 color: Colors.white.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w700,
                 fontSize: 24,
               ),
             ),
-
             const SizedBox(height: 50),
             SpinKitThreeBounce(
               color: Colors.white.withValues(alpha: .7),
@@ -80,6 +64,16 @@ class _SplashViewBodyState extends State<SplashViewBody> {
           ],
         ),
       ),
+    );
+  }
+
+  LinearGradient linearGradientInSplashView() {
+    return LinearGradient(
+      colors: [Color(0xff2D2474), Colors.deepPurple],
+      // ! colors: [Colors.blue, Color(0xFFAB47BC)], // Deep purple to lavender
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      stops: [.2, .6],
     );
   }
 }
