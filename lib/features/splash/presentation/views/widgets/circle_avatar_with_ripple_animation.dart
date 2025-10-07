@@ -17,7 +17,7 @@ class CircleAvatarWithRippleAnimation extends StatelessWidget {
       child: CircleAvatar(
         minRadius: 75,
         maxRadius: 75,
-        backgroundImage: AssetImage('assets/images/image.png'),
+        backgroundImage: AssetImage('assets/images/p_with_back.png'),
       ),
     );
   }
