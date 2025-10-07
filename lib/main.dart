@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/splash_view.dart';
 
 void main() {
-  
-  runApp(const PlusApp());
+  runApp(const PulseApp());
 }
-class PlusApp extends StatelessWidget {
-  const PlusApp({super.key});
+
+class PulseApp extends StatelessWidget {
+  const PulseApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        scaffoldBackgroundColor: Color(0xff141628),
       ),
-      home:  const SplashView());
+      home: const SplashView(),
+    );
   }
 }
