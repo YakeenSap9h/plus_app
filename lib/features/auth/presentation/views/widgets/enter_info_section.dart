@@ -14,7 +14,12 @@ class EnterInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 24),
+      padding: EdgeInsets.only(
+        top: 24,
+        bottom: 20,
+        left: MediaQuery.of(context).size.width * .03,
+        right: MediaQuery.of(context).size.width * .03,
+      ),
 
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 8),

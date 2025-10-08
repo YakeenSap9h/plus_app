@@ -15,8 +15,12 @@ class SignUpEnterInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 24),
-
+      padding: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width * .03,
+        right: MediaQuery.of(context).size.width * .03,
+        top: 24,
+        bottom: 50,
+      ),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 24, horizontal: 8),
 
@@ -25,6 +29,7 @@ class SignUpEnterInfoSection extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -84,6 +89,7 @@ class SignUpEnterInfoSection extends StatelessWidget {
             ),
 
             const SizedBox(height: 55),
+
             const CustomBigButton(text: 'SignUp'),
           ],
         ),

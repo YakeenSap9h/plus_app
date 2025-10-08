@@ -11,8 +11,10 @@ class SignUpBody extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(gradient: linearGradientInLogInPage()),
-      child: Column(
-        children: const [SignUpIntroSection(), SignUpEnterInfoSection()],
+      child: SingleChildScrollView(
+        child: Column(
+          children: const [SignUpIntroSection(), SignUpEnterInfoSection()],
+        ),
       ),
     );
   }
