@@ -9,8 +9,17 @@ import 'package:plus_app/core/utils/widgets/custom_text_form_field.dart';
 import 'package:plus_app/features/auth/presentation/views/widgets/custom_big_button.dart';
 import 'package:plus_app/features/auth/presentation/views/widgets/sign_up_names_fields.dart';
 
-class SignUpEnterInfoSection extends StatelessWidget {
-  const SignUpEnterInfoSection({super.key});
+class SignUpEnterInfoSection extends StatefulWidget {
+  const SignUpEnterInfoSection({
+    super.key,
+  });
+  
+
+  @override
+  State<SignUpEnterInfoSection> createState() => _SignUpEnterInfoSectionState();
+}
+
+class _SignUpEnterInfoSectionState extends State<SignUpEnterInfoSection> {
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +77,16 @@ class SignUpEnterInfoSection extends StatelessWidget {
             ),
 
             const SizedBox(height: 24),
-            SignUpNamesFields(),
+            const SignUpNamesFields(),
             const SizedBox(height: 12),
 
             const Text('Email', style: Styles.textStyle14),
             const SizedBox(height: 12),
 
-            const CustomTextFormField(
+            CustomTextFormField(
+              
               inputForm: 'Email',
-              prefixIcon: Icon(FontAwesomeIcons.envelope),
+              prefixIcon: const Icon(FontAwesomeIcons.envelope),
             ),
             const SizedBox(height: 12),
 
@@ -90,7 +100,10 @@ class SignUpEnterInfoSection extends StatelessWidget {
 
             const SizedBox(height: 55),
 
-            const CustomBigButton(text: 'SignUp'),
+            CustomBigButton(
+              text: 'SignUp',
+              
+            ),
           ],
         ),
       ),
