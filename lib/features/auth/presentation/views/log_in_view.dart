@@ -9,3 +9,4 @@ class LogInView extends StatelessWidget {
     return Scaffold(body: LogInViewBody());
   }
 }
+

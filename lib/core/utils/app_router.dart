@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:plus_app/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:plus_app/features/auth/presentation/views/log_in_view.dart';
 import 'package:plus_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/splash_view.dart';
@@ -15,7 +17,10 @@ abstract class AppRouter {
         path: kLogInView,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const LogInView(),
+          child: BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const LogInView(),
+          ),
           transitionDuration: const Duration(milliseconds: 600),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
@@ -26,7 +31,10 @@ abstract class AppRouter {
         path: kSignUpView,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const SignUpView(),
+          child: BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const SignUpView(),
+          ),
           transitionDuration: const Duration(milliseconds: 600),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
