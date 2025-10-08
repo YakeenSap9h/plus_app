@@ -1,0 +1,7 @@
+{
+  // Enable GitHub Copilot inline suggestions in this workspace
+  "github.copilot.inlineSuggest.enable": true,
+
+  // Optional: enable suggestions from the inline completions experimental API
+  "editor.inlineSuggest.enabled": true
+}

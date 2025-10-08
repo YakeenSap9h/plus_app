@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plus_app/core/utils/functions/linear_gradient_in_log_in_page.dart';
 import 'package:plus_app/core/utils/styles.dart';
 import 'package:plus_app/features/auth/presentation/views/widgets/cicle_avatar_with_neon_light.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/connect_share_inspire.dart';
@@ -30,12 +31,5 @@ class LogInViewBody extends StatelessWidget {
     );
   }
 
-  LinearGradient linearGradientInLogInPage() {
-    return LinearGradient(
-      colors: [Color(0xff2D2474), Colors.deepPurple, Color(0xff2D2474)],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      stops: [.1, 0.5, 0.6],
-    );
-  }
+ 
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:plus_app/core/utils/app_router.dart';
+import 'package:plus_app/core/utils/functions/linear_gradient_in_splash_view.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/circle_avatar_with_ripple_animation.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/connect_share_inspire.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/pulse_text.dart';
@@ -67,13 +68,4 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     );
   }
 
-  LinearGradient linearGradientInSplashView() {
-    return LinearGradient(
-      colors: [Color(0xff2D2474), Colors.deepPurple],
-      // ! colors: [Colors.blue, Color(0xFFAB47BC)], // Deep purple to lavender
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      stops: [.2, .6],
-    );
-  }
 }
