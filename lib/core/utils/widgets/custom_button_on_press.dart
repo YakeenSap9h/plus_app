@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plus_app/consts.dart';
 import 'package:plus_app/core/utils/styles.dart';
 
 class CustomButtonONPress extends StatelessWidget {
@@ -10,25 +9,22 @@ class CustomButtonONPress extends StatelessWidget {
     required this.text,
     this.fontSize,
     this.onPressed,
+    required this.linearGradient,
   });
   final String text;
   final Color textColor;
   final BorderRadius? borderRadius;
   final double? fontSize;
   final void Function()? onPressed;
+  final LinearGradient linearGradient;
+ 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 1),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            // colors: [Color(0xff2D2474), Colors.deepPurple],
-            colors: [Colors.purple, kPrimaryPurple],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [.2, .6],
-          ),
+          gradient: linearGradient,
           borderRadius: BorderRadius.circular(13),
         ),
         child: TextButton(
