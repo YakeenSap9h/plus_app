@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plus_app/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:plus_app/features/auth/presentation/views/widgets/log_in_view_body.dart';
 
 class LogInView extends StatelessWidget {
@@ -6,7 +8,9 @@ class LogInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: LogInViewBody());
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: Scaffold(body: LogInViewBody()),
+    );
   }
 }
-

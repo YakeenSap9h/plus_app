@@ -13,6 +13,7 @@ class CustomTextFormField extends StatefulWidget {
   final Function(String)? onChanged;
   final bool? obscureText;
   final Icon prefixIcon;
+
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -59,7 +60,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: Colors.white.withValues(alpha: .3)),
         ),
-
       ),
     );
   }

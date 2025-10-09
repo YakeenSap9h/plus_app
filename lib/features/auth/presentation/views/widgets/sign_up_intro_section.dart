@@ -14,7 +14,7 @@ class SignUpIntroSection extends StatelessWidget {
         children: [
           const CircleAvatarWithNeonLight(),
           const SizedBox(height: 8),
-         const  PulseText(fontSize: 44),
+          const PulseText(fontSize: 44),
           const SizedBox(height: 2),
           ConnectShareInspire(
             textStyle: Styles.textStyle14.copyWith(fontWeight: FontWeight.bold),

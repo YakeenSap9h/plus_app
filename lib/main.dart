@@ -6,12 +6,13 @@ import 'package:plus_app/firebase_options.dart';
 import 'package:plus_app/simple_bloc_observer.dart';
 
 void main() async{
+  Bloc.observer = SimpleBlocObserver();
+
     WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-    Bloc.observer = SimpleBlocObserver();
-
+    
   runApp(const PulseApp());
 }
 

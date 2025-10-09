@@ -1,16 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:plus_app/consts.dart';
 import 'package:plus_app/core/utils/app_router.dart';
 import 'package:plus_app/core/utils/styles.dart';
-import 'package:plus_app/core/utils/widgets/custom_button_on_press.dart';
 import 'package:plus_app/core/utils/widgets/custom_text_form_field.dart';
+import 'package:plus_app/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:plus_app/features/auth/presentation/views/widgets/custom_big_button.dart';
+import 'package:plus_app/features/auth/presentation/views/widgets/custom_log_in_sign_up_row_buttons.dart';
 
-class EnterInfoSection extends StatelessWidget {
+class EnterInfoSection extends StatefulWidget {
   const EnterInfoSection({super.key});
 
+  @override
+  State<EnterInfoSection> createState() => _EnterInfoSectionState();
+}
+
+class _EnterInfoSectionState extends State<EnterInfoSection> {
+  String? userEmail;
+
+  String? userPassWord;
+
+  GlobalKey<FormState> formkey = GlobalKey();
+
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,67 +42,69 @@ class EnterInfoSection extends StatelessWidget {
           color: Color(0xff36176F),
           borderRadius: BorderRadius.circular(14),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        child: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is LogInSuccess) {
+              GoRouter.of(context).push(AppRouter.kHomeView);
+            }
+          },
+          child: Form(
+            key: formkey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomButtonONPress(
-                  onPressed: () {
-                    GoRouter.of(context).pop();
+                CustomLogInSignUpRowButtons(),
+
+                const SizedBox(height: 24),
+
+                const Text('Email', style: Styles.textStyle14),
+                const SizedBox(height: 12),
+
+                CustomTextFormField(
+                  onChanged: (data) {
+                    userEmail = data;
                   },
-                  linearGradient: LinearGradient(
-                    // colors: [Color(0xff2D2474), Colors.deepPurple],
-                    colors: [Colors.purple, kPrimaryPurple],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: const [.2, .6],
-                  ),
-                  textColor: Colors.white,
-                  text: 'LogIn',
+                  inputForm: 'Email',
+                  prefixIcon: const Icon(FontAwesomeIcons.envelope),
                 ),
-                CustomButtonONPress(
-                  onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kSignUpView);
+                const SizedBox(height: 12),
+
+                const Text('Password', style: Styles.textStyle14),
+                const SizedBox(height: 12),
+
+                CustomTextFormField(
+                  obscureText: true,
+                  inputForm: 'Password',
+                  onChanged: (data) {
+                    userPassWord = data;
                   },
-                  textColor: Colors.white,
-                  text: 'SignUp',
-                  linearGradient: LinearGradient(
-                    // colors: [Color(0xff2D2474), Colors.deepPurple],
-                    colors: [kPrimarDarkPurpleBlue],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [.2],
-                  ),
+                  prefixIcon: const Icon(Icons.lock_open_sharp),
+                ),
+
+                SizedBox(height: 55),
+                CustomBigButton(
+                  text: 'LogIn',
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {
+                      BlocProvider.of<AuthCubit>(context).userLogIn(
+                        userEmail: userEmail!,
+                        userPassWord: userPassWord!,
+                      );
+                    }
+                  },
                 ),
               ],
             ),
-
-            const SizedBox(height: 24),
-
-            const Text('Email', style: Styles.textStyle14),
-            const SizedBox(height: 12),
-
-            const CustomTextFormField(
-              inputForm: 'Email',
-              prefixIcon: Icon(FontAwesomeIcons.envelope),
-            ),
-            const SizedBox(height: 12),
-
-            const Text('Password', style: Styles.textStyle14),
-            const SizedBox(height: 12),
-
-            const CustomTextFormField(
-              inputForm: 'Password',
-              prefixIcon: Icon(Icons.lock_open_sharp),
-            ),
-
-            const SizedBox(height: 55),
-            const CustomBigButton(text: 'LogIn'),
-          ],
+          ),
         ),
       ),
+    );
+  }
+
+  Future<void> userLogIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: userEmail!,
+      password: userPassWord!,
     );
   }
 }
