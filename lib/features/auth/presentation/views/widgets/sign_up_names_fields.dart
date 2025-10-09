@@ -1,13 +1,27 @@
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plus_app/core/utils/styles.dart';
-import 'package:plus_app/core/utils/widgets/custom_text_form_field.dart';
 
-class SignUpNamesFields extends StatelessWidget {
+class SignUpNamesFields extends StatefulWidget {
   const SignUpNamesFields({
     super.key,
   });
+
+  @override
+  State<SignUpNamesFields> createState() => _SignUpNamesFieldsState();
+}
+
+class _SignUpNamesFieldsState extends State<SignUpNamesFields> {
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +37,11 @@ class SignUpNamesFields extends StatelessWidget {
     
             SizedBox(
               width: 150,
-              child: CustomTextFormField(
-                inputForm: '...',
-                prefixIcon: Icon(Icons.person),
-              ),
+              // child: CustomTextFormField(
+              //   textEditingController: ,
+              //   inputForm: '...',
+              //   prefixIcon: Icon(Icons.person),
+              // ),
             ),
           ],
         ),
@@ -40,10 +55,11 @@ class SignUpNamesFields extends StatelessWidget {
     
             SizedBox(
               width: 150,
-              child: CustomTextFormField(
-                inputForm: '...',
-                prefixIcon: Icon(FontAwesomeIcons.peopleGroup),
-              ),
+              // child: CustomTextFormField(
+              //   textEditingController:  ,
+              //   inputForm: '...',
+              //   prefixIcon: Icon(FontAwesomeIcons.peopleGroup),
+              // ),
             ),
           ],
         ),

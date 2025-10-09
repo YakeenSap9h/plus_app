@@ -100,9 +100,10 @@ class _SignUpEnterInfoSectionState extends State<SignUpEnterInfoSection> {
                   ],
                 ),
 
-                //  !  const SizedBox(height: 24),
                 // !! const SignUpNamesFields(),
                 //! const SizedBox(height: 12),
+                const SizedBox(height: 24),
+
                 const Text('Email', style: Styles.textStyle14),
                 const SizedBox(height: 12),
 
