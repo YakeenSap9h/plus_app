@@ -25,6 +25,16 @@ class _EnterInfoSectionState extends State<EnterInfoSection> {
   GlobalKey<FormState> formkey = GlobalKey();
 
   bool isLoading = false;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,6 +55,8 @@ class _EnterInfoSectionState extends State<EnterInfoSection> {
         child: BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is LogInSuccess) {
+              emailController.clear();
+              passwordController.clear();
               GoRouter.of(context).push(AppRouter.kHomeView);
             }
           },
@@ -61,6 +73,8 @@ class _EnterInfoSectionState extends State<EnterInfoSection> {
                 const SizedBox(height: 12),
 
                 CustomTextFormField(
+                  textEditingController: emailController,
+                  //                      textEditingController?.clear();
                   onChanged: (data) {
                     userEmail = data;
                   },
@@ -73,6 +87,7 @@ class _EnterInfoSectionState extends State<EnterInfoSection> {
                 const SizedBox(height: 12),
 
                 CustomTextFormField(
+                  textEditingController: passwordController,
                   obscureText: true,
                   inputForm: 'Password',
                   onChanged: (data) {

@@ -26,6 +26,16 @@ class _SignUpEnterInfoSectionState extends State<SignUpEnterInfoSection> {
   GlobalKey<FormState> formkey = GlobalKey();
 
   String? email;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,87 +52,98 @@ class _SignUpEnterInfoSectionState extends State<SignUpEnterInfoSection> {
           color: Color(0xff36176F),
           borderRadius: BorderRadius.circular(14),
         ),
-        child: Form(
-          key: formkey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomButtonONPress(
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    linearGradient: LinearGradient(
-                      // colors: [Color(0xff2D2474), Colors.deepPurple],
-                      colors: [kPrimarDarkPurpleBlue],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: [.2],
+        child: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is RegisterSuccess) {
+              emailController.clear();
+              passwordController.clear();
+              GoRouter.of(context).push(AppRouter.kHomeView);
+            }
+          },
+          child: Form(
+            key: formkey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomButtonONPress(
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      linearGradient: LinearGradient(
+                        // colors: [Color(0xff2D2474), Colors.deepPurple],
+                        colors: [kPrimarDarkPurpleBlue],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: [.2],
+                      ),
+                      textColor: Colors.white,
+                      text: 'LogIn',
                     ),
-                    textColor: Colors.white,
-                    text: 'LogIn',
-                  ),
-                  CustomButtonONPress(
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.kSignUpView);
-                    },
-                    textColor: Colors.white,
-                    text: 'SignUp',
-                    linearGradient: LinearGradient(
-                      // colors: [Color(0xff2D2474), Colors.deepPurple],
-                      colors: [Colors.purple, kPrimaryPurple],
+                    CustomButtonONPress(
+                      onPressed: () {
+                        GoRouter.of(context).push(AppRouter.kSignUpView);
+                      },
+                      textColor: Colors.white,
+                      text: 'SignUp',
+                      linearGradient: LinearGradient(
+                        // colors: [Color(0xff2D2474), Colors.deepPurple],
+                        colors: [Colors.purple, kPrimaryPurple],
 
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: const [.2, .6],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: const [.2, .6],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              //  !  const SizedBox(height: 24),
-              // !! const SignUpNamesFields(),
-              //! const SizedBox(height: 12),
-              const Text('Email', style: Styles.textStyle14),
-              const SizedBox(height: 12),
+                //  !  const SizedBox(height: 24),
+                // !! const SignUpNamesFields(),
+                //! const SizedBox(height: 12),
+                const Text('Email', style: Styles.textStyle14),
+                const SizedBox(height: 12),
 
-              CustomTextFormField(
-                onChanged: (data) {
-                  userEmail = data;
-                },
-                inputForm: 'Email',
-                prefixIcon: const Icon(FontAwesomeIcons.envelope),
-              ),
-              const SizedBox(height: 12),
+                CustomTextFormField(
+                  textEditingController: emailController,
+                  onChanged: (data) {
+                    userEmail = data;
+                  },
+                  inputForm: 'Email',
+                  prefixIcon: const Icon(FontAwesomeIcons.envelope),
+                ),
+                const SizedBox(height: 12),
 
-              const Text('Password', style: Styles.textStyle14),
-              const SizedBox(height: 12),
+                const Text('Password', style: Styles.textStyle14),
+                const SizedBox(height: 12),
 
-              CustomTextFormField(
-                obscureText: true,
-                onChanged: (data) {
-                  userPassWord = data;
-                },
-                inputForm: 'Password',
-                prefixIcon: const Icon(Icons.lock_open_sharp),
-              ),
+                CustomTextFormField(
+                  textEditingController: passwordController,
+                  obscureText: true,
+                  onChanged: (data) {
+                    userPassWord = data;
+                  },
+                  inputForm: 'Password',
+                  prefixIcon: const Icon(Icons.lock_open_sharp),
+                ),
 
-              const SizedBox(height: 55),
+                const SizedBox(height: 55),
 
-              CustomBigButton(
-                text: 'SignUp',
-                onPressed: () async {
-                  if (formkey.currentState!.validate()) {
-                    BlocProvider.of<AuthCubit>(context).userRegister(
-                      userEmail: userEmail,
-                      userPassWord: userPassWord,
-                    );
-                  }
-                },
-              ),
-            ],
+                CustomBigButton(
+                  text: 'SignUp',
+                  onPressed: () async {
+                    if (formkey.currentState!.validate()) {
+                      BlocProvider.of<AuthCubit>(context).userRegister(
+                        userEmail: userEmail,
+                        userPassWord: userPassWord,
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
