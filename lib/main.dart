@@ -2,7 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plus_app/core/utils/app_router.dart';
-import 'package:plus_app/features/home/presentation/manager/chat_cubit/chat_cubit.dart';
+import 'package:plus_app/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:plus_app/features/home/presentation/manager/cubit/chat_cubit.dart';
 import 'package:plus_app/firebase_options.dart';
 import 'package:plus_app/simple_bloc_observer.dart';
 
@@ -20,8 +21,12 @@ class PulseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ChatCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => ChatCubit()),
+
+      ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,

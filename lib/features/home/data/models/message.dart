@@ -1,4 +1,3 @@
-
 import 'package:plus_app/consts.dart';
 
 class Message {
