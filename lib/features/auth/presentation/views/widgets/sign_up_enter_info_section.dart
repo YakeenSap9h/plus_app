@@ -57,7 +57,7 @@ class _SignUpEnterInfoSectionState extends State<SignUpEnterInfoSection> {
             if (state is RegisterSuccess) {
               emailController.clear();
               passwordController.clear();
-              GoRouter.of(context).push(AppRouter.kHomeView);
+              GoRouter.of(context).push(AppRouter.kHomeView, extra: userEmail);
             }
           },
           child: Form(

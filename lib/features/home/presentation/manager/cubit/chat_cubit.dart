@@ -13,14 +13,12 @@ class ChatCubit extends Cubit<ChatState> {
   List<Message> messageslist = [];
 
   void sendMessage({required String message, required email}) {
+    print('ggggggggggggggggg\n');
+    print("SENDING TO FIRESTORE: id=$email, message=$message");
     try {
-      messages.add({
-        kMessage: message,
-        kCreatedAt: DateTime.now(),
-        'id': email,
-      });
+      messages.add({kMessage: message, kCreatedAt: DateTime.now(), kID: email});
     } catch (e) {
-      throw e.toString();
+      print('ERROR ENDING $e');
     }
   }
 
@@ -29,8 +27,8 @@ class ChatCubit extends Cubit<ChatState> {
       messageslist.clear();
       for (var doc in event.docs) {
         print("dooc ==== ${doc}");
-
-        messageslist.add(Message.fromJson(doc));
+        var data = doc.data() as Map<String, dynamic>;
+        messageslist.add(Message.fromJson(data));
       }
       print("success in getMessage");
       emit(ChatSuccess(messageslist: messageslist));

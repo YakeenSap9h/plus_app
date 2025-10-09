@@ -57,7 +57,7 @@ class _EnterInfoSectionState extends State<EnterInfoSection> {
             if (state is LogInSuccess) {
               emailController.clear();
               passwordController.clear();
-              GoRouter.of(context).push(AppRouter.kHomeView);
+              GoRouter.of(context).push(AppRouter.kHomeView, extra: userEmail);
             }
           },
           child: Form(
@@ -117,7 +117,7 @@ class _EnterInfoSectionState extends State<EnterInfoSection> {
   }
 
   Future<void> userLogIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+ await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: userEmail!,
       password: userPassWord!,
     );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:plus_app/features/auth/presentation/views/log_in_view.dart';
 import 'package:plus_app/features/auth/presentation/views/sign_up_view.dart';
+import 'package:plus_app/features/home/presentation/manager/cubit/chat_cubit.dart';
 import 'package:plus_app/features/home/presentation/views/home_view.dart';
 import 'package:plus_app/features/splash/presentation/views/widgets/splash_view.dart';
 
@@ -37,7 +39,14 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kHomeView,
-        builder: (context, state) =>  HomeView(),
+        name: AppRouter.kHomeView,
+        builder: (context, state) {
+          final email = state.extra as String;
+          return BlocProvider(
+            create: (_) => ChatCubit()..getMessage(),
+            child: const HomeView(),
+          );
+        },
       ),
     ],
   );
